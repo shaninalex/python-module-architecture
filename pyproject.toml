@@ -7,7 +7,10 @@ authors = [
     { name = "shaninalex", email = "shanin.x@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "starlette>=1.6.0",
+    "uvicorn>=0.52.4",
+]
 
 [project.scripts]
 market = "market:main"
