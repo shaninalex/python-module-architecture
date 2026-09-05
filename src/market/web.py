@@ -1,3 +1,4 @@
-from bootstrap.web import create_app
+from bootstrap.web import create_web
+from main import container
 
-app = create_app()
+app = create_web(container)

@@ -47,14 +47,28 @@ name = "market"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "punq" },
     { name = "starlette" },
     { name = "uvicorn" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "punq", specifier = ">=0.8.0" },
     { name = "starlette", specifier = ">=1.6.0" },
     { name = "uvicorn", specifier = ">=0.52.4" },
+]
+
+[[package]]
+name = "punq"
+version = "0.8.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/03/31/be5732aaa2b7cf57225ff25bbd88e4b304890a1aa24f675658f026e12a43/punq-0.8.0.tar.gz", hash = "sha256:efc5308e5b027a466449389ea5b1e9fcfd5eb65495bcb766e3f725a9d6db9998", size = 18159, upload-time = "2026-07-03T17:56:58.105Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4f/92/b78a5a31180f5af151ea0b28ee6c0c7964fb79cfea394fbba6f028423c11/punq-0.8.0-py3-none-any.whl", hash = "sha256:1f34dee67f26bd5ea7f4dfeee11b22aa1a19c634421262a07f2b51a9dc8e2c41", size = 19431, upload-time = "2026-07-03T17:56:57.25Z" },
 ]
 
 [[package]]

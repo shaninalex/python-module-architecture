@@ -1,9 +1,12 @@
 from starlette.applications import Starlette
 from starlette.types import ASGIApp
 
+from adapters.web.router import WebAdapter
+from bootstrap.container import Container
+from core.application import Application
 
-def create_app() -> ASGIApp:
-    return Starlette(
-        debug=True,
-        routes=[],
-    )
+
+def create_web(container: Container) -> ASGIApp:
+    application = container.resolve(Application)
+    adapter = WebAdapter(application)
+    return adapter()
