@@ -1,7 +1,7 @@
 from bootstrap.container import Container
 from core.command_bus import CommandBus
 from modules.catalog.application.handlers import ListProductsHandler
-from modules.catalog.application.query import ListProducts
+from modules.catalog.application.query import ListProductsCommand
 from modules.catalog.infrastructure.db import DBCatalog
 from modules.catalog.infrastructure.mock_db_client import MockDBCatalogClient
 from src.bootstrap.abstract import Module
@@ -15,6 +15,6 @@ class CatalogModule(Module):
         cmd = container.resolve(CommandBus)
 
         cmd.register(
-            ListProducts,
+            ListProductsCommand,
             handler,
         )

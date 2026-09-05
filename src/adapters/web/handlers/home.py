@@ -4,7 +4,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from core.application import Application
-from modules.catalog.application.query import ListProducts
+from modules.catalog.application.query import ListProductsCommand
 
 
 class HomePage:
@@ -15,7 +15,7 @@ class HomePage:
         query = request.query_params.get("q")
 
         products = await self.app.execute(
-            ListProducts(query=query)
+            ListProductsCommand(query=query)
         )
 
         return JSONResponse([asdict(p) for p in products])
