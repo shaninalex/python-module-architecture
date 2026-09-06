@@ -19,6 +19,17 @@ class ProductVariantModel:
     created_at: datetime.datetime
     updated_at: datetime.datetime
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "sku": self.sku,
+            "barcode": self.barcode,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
+        }
+
 
 @dataclass
 class ProductModel:
@@ -33,3 +44,14 @@ class ProductModel:
     # NOTE:
     # until I add images in schema - this will be image field
     image: str = field(default_factory=random_product_image)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "short_description": self.short_description,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
+            "variants": [v.to_dict() for v in self.variants]
+        }

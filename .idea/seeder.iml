@@ -2,7 +2,7 @@
 <module external.system.id="pyproject.toml" type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/database/seeder">
-      <sourceFolder url="file://$MODULE_DIR$/database/seeder" />
+      <sourceFolder url="file://$MODULE_DIR$/database/seeder" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="~/Projects/python-module-architecture/.venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

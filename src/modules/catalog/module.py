@@ -7,6 +7,7 @@ from modules.catalog.application.query import ListProductsCommand, ProductDetail
 from modules.catalog.infrastructure.db import DBCatalog
 from src.bootstrap.abstract import Module
 
+
 class CatalogModule(Module):
     def configure(self, container: Container):
         db = container.resolve(AsyncEngine)
