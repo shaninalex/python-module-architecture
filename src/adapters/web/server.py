@@ -8,6 +8,7 @@ from starlette.types import ASGIApp
 
 from adapters.web.core.template import Templates
 from adapters.web.handlers.home import HomePage
+from adapters.web.handlers.product_detail import ProductPage
 from adapters.web.handlers.static_pages import StaticPages
 from bootstrap.database import db_engine
 from core.application import Application
@@ -33,6 +34,7 @@ class WebAdapter:
 
     def routes(self):
         home_page = HomePage(self.app, self.templates)
+        product_page = ProductPage(self.app, self.templates)
         static_pages = StaticPages(self.templates)
 
         return [
@@ -41,4 +43,5 @@ class WebAdapter:
             Route("/contact", static_pages.contact, name='contact'),
             Route("/about", static_pages.about, name='about'),
             Route("/terms", static_pages.terms_conditions, name='terms_conditions'),
+            Route("/product/{product_id:int}", product_page.get, name='product'),
         ]

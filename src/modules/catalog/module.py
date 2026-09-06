@@ -2,21 +2,16 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 
 from bootstrap.container import Container
 from core.command_bus import CommandBus
-from modules.catalog.application.handlers import ListProductsHandler
-from modules.catalog.application.query import ListProductsCommand
+from modules.catalog.application.handlers import ListProductsHandler, ProductDetailHandler
+from modules.catalog.application.query import ListProductsCommand, ProductDetailCommand
 from modules.catalog.infrastructure.db import DBCatalog
 from src.bootstrap.abstract import Module
 
 class CatalogModule(Module):
     def configure(self, container: Container):
         db = container.resolve(AsyncEngine)
-
         catalog = DBCatalog(db)
-
-        handler = ListProductsHandler(catalog)
         cmd = container.resolve(CommandBus)
 
-        cmd.register(
-            ListProductsCommand,
-            handler,
-        )
+        cmd.register(ListProductsCommand, ListProductsHandler(catalog))
+        cmd.register(ProductDetailCommand, ProductDetailHandler(catalog))

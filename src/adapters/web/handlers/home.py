@@ -14,9 +14,23 @@ class HomePage:
 
     async def get(self, request: Request):
         query = request.query_params.get("q")
+        offset = 0
+        limit = 20
+
+        _offset = request.query_params.get("offset")
+        if _offset is not None:
+            offset = int(_offset)
+
+        _limit = request.query_params.get("limit")
+        if _limit is not None:
+            limit = int(_limit)
 
         products = await self.app.execute(
-            ListProductsCommand(query=query)
+            ListProductsCommand(
+                query=query,
+                offset=offset,
+                limit=limit,
+            )
         )
 
         return self.templates.TemplateResponse(request, "views/home.html", {
