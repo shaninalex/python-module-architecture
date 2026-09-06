@@ -9,15 +9,14 @@ from starlette.types import ASGIApp
 from adapters.web.core.template import Templates
 from adapters.web.handlers.home import HomePage
 from adapters.web.handlers.static_pages import StaticPages
-from bootstrap.database import db
+from bootstrap.database import db_engine
 from core.application import Application
 
 
 @asynccontextmanager
 async def lifespan(app):
-    await db.connect()
     yield
-    await db.disconnect()
+    await db_engine.dispose()
 
 
 class WebAdapter:

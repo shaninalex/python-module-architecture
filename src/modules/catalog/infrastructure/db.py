@@ -1,14 +1,15 @@
-from typing import List
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession, AsyncEngine
 
-from databases import Database
-
-from modules.catalog.domain.product import ProductModel
+from modules.catalog.infrastructure.schema import Product
 
 
 class DBCatalog:
-    def __init__(self, db: Database):
+    def __init__(self, db: AsyncEngine):
         self.db = db
 
-    async def list_products(self, *, query: str | None, page: int, limit: int) -> List[ProductModel]:
-        # return self.db_client.list_products(query, page, limit)
-        return []
+    async def list_products(self, *, query: str | None, offset: int, limit: int):
+        async with AsyncSession(self.db) as session:
+            stmt = select(Product).limit(limit).offset(offset)
+            products = await session.scalars(stmt)
+            return products

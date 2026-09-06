@@ -1,7 +1,7 @@
-from databases import Database
+from sqlalchemy.ext.asyncio import AsyncEngine
 
 from bootstrap.container import Container
-from bootstrap.database import db
+from bootstrap.database import db_engine
 from core.application import Application
 from core.command_bus import CommandBus
 from core.event_bus import EventBus
@@ -17,7 +17,7 @@ def create_application():
 
     events = EventBus()
     _container.register(EventBus, instance=events)
-    _container.register(Database, instance=db)
+    _container.register(AsyncEngine, instance=db_engine)
 
     # modules
     application = Application(

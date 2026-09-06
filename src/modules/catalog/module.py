@@ -1,4 +1,4 @@
-from databases import Database
+from sqlalchemy.ext.asyncio import AsyncEngine
 
 from bootstrap.container import Container
 from core.command_bus import CommandBus
@@ -9,7 +9,7 @@ from src.bootstrap.abstract import Module
 
 class CatalogModule(Module):
     def configure(self, container: Container):
-        db = container.resolve(Database)
+        db = container.resolve(AsyncEngine)
 
         catalog = DBCatalog(db)
 
