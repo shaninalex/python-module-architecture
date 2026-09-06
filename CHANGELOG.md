@@ -1,3 +1,9 @@
+## 0.3.0 (2026-09-06)
+
+### Feat
+
+- **modules**: create auth module
+
 ## 0.2.0 (2026-09-06)
 
 ### Feat
