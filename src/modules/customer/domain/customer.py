@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List
 
 
 @dataclass
@@ -19,14 +18,13 @@ class CustomerUpdate:
 
 
 @dataclass
-class CustomerModel:
+class Customer:
     id: int
     full_name: str
     email: str  # TODO: email field
     active: bool
     created_at: datetime
     updated_at: datetime
-    credentials: List[CustomerCredentialModel]
 
     def to_dict(self):
         return {
@@ -36,16 +34,16 @@ class CustomerModel:
             "active": self.active,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
-            "credentials": [c.to_dict() for c in self.credentials]
         }
 
 
 @dataclass
-class CustomerCredentialModel:
-    id: str
-    customer_id: str
+class CustomerCredential:
+    id: int
+    customer_id: int
     provider: str
     provider_user_id: str
+    password_hash: str
     email: str
     created_at: datetime
 
@@ -57,16 +55,4 @@ class CustomerCredentialModel:
             "provider_user_id": self.provider_user_id,
             "email": self.email,
             "created_at": self.created_at.isoformat() if self.created_at else None,
-        }
-
-
-@dataclass
-class CustomerLoginHistoryModel:
-    id: str
-    logged_in_at: datetime
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "logged_in_at": self.logged_in_at.isoformat() if self.logged_in_at else None,
         }

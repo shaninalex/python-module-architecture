@@ -10,7 +10,7 @@ def random_product_image() -> str:
 
 
 @dataclass
-class ProductVariantModel:
+class ProductVariant:
     id: int
     title: str
     description: str
@@ -32,14 +32,14 @@ class ProductVariantModel:
 
 
 @dataclass
-class ProductModel:
+class Product:
     id: int
     title: str
     description: str
     short_description: str
     created_at: datetime.datetime
     updated_at: datetime.datetime
-    variants: List[ProductVariantModel]
+    variants: List[ProductVariant]
 
     # NOTE:
     # until I add images in schema - this will be image field

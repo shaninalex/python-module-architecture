@@ -1,33 +1,28 @@
-from modules.customer.application.commands import CustomerCreateCommand, CustomerGetCommand, CustomerGetByEmailCommand
-from modules.customer.domain.customer import CustomerModel
-from modules.customer.domain.ports import CustomerPort
+from argon2 import PasswordHasher
+
+from modules.customer.application.commands import CustomerCreateCommand, CustomerGetCommand
+from modules.customer.domain.customer import Customer
+from modules.customer.domain.ports import CustomerInternalReader, CustomerInternalWriter
 
 
 class CustomerCreateHandler:
 
-    def __init__(self, catalog: CustomerPort):
+    def __init__(self, catalog: CustomerInternalWriter):
         self.catalog = catalog
 
-    async def __call__(self, cmd: CustomerCreateCommand) -> CustomerModel:
+    async def __call__(self, cmd: CustomerCreateCommand) -> Customer:
+        ph = PasswordHasher()
+        _hash = ph.hash(cmd.payload.password)
+        cmd.payload.password = _hash
         customer = await self.catalog.create(payload=cmd.payload)
         return customer
 
 
 class CustomerGetHandler:
 
-    def __init__(self, catalog: CustomerPort):
+    def __init__(self, catalog: CustomerInternalReader):
         self.catalog = catalog
 
-    async def __call__(self, cmd: CustomerGetCommand) -> CustomerModel:
+    async def __call__(self, cmd: CustomerGetCommand) -> Customer:
         customer = await self.catalog.get(customer_id=cmd.user_id)
-        return customer
-
-
-class CustomerGetByEmailHandler:
-
-    def __init__(self, catalog: CustomerPort):
-        self.catalog = catalog
-
-    async def __call__(self, cmd: CustomerGetByEmailCommand) -> CustomerModel:
-        customer = await self.catalog.get_by_email(email=cmd.email)
         return customer

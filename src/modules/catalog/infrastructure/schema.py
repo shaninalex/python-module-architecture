@@ -2,16 +2,13 @@ import datetime
 from typing import List
 
 from sqlalchemy import String, func, DateTime, ForeignKey
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from modules.catalog.domain.product import ProductModel, ProductVariantModel
-
-
-class Base(DeclarativeBase):
-    pass
+from bootstrap.database import Base
+from modules.catalog.domain.product import Product, ProductVariant
 
 
-class ProductVariant(Base):
+class ProductVariantORM(Base):
     __tablename__ = "product_variants"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String())
@@ -22,13 +19,13 @@ class ProductVariant(Base):
     updated_at: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     product_id: Mapped[int] = mapped_column(ForeignKey("products.id"))
-    product: Mapped["Product"] = relationship(back_populates="variants")
+    product: Mapped["ProductORM"] = relationship(back_populates="variants")
 
     def __repr__(self) -> str:
         return f"ProductVariant(id={self.id!r} title={self.title!r})"
 
-    def to_model(self) -> ProductVariantModel:
-        return ProductVariantModel(
+    def to_model(self) -> ProductVariant:
+        return ProductVariant(
             id=self.id,
             title=self.title,
             description=self.description,
@@ -39,7 +36,7 @@ class ProductVariant(Base):
         )
 
 
-class Product(Base):
+class ProductORM(Base):
     __tablename__ = "products"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String())
@@ -48,13 +45,13 @@ class Product(Base):
     created_at: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
-    variants: Mapped[List["ProductVariant"]] = relationship(back_populates="product", cascade="all, delete-orphan")
+    variants: Mapped[List["ProductVariantORM"]] = relationship(back_populates="product", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"Product(id={self.id!r} title={self.title!r})"
 
-    def to_model(self) -> ProductModel:
-        return ProductModel(
+    def to_model(self) -> Product:
+        return Product(
             id=self.id,
             title=self.title,
             description=self.description,

@@ -2,13 +2,10 @@ from datetime import datetime
 from typing import List
 
 from sqlalchemy import String, DateTime, func, Boolean, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from modules.customer.domain.customer import CustomerModel
-
-
-class Base(DeclarativeBase):
-    pass
+from bootstrap.database import Base
+from modules.customer.domain.customer import Customer, CustomerCredential
 
 
 class CustomerORM(Base):
@@ -24,18 +21,15 @@ class CustomerORM(Base):
 
     credentials: Mapped[List["CustomerCredentialsORM"]] = relationship(back_populates="customer",
                                                                        cascade="all, delete-orphan")
-    login_history: Mapped[List["CustomerLoginHistoryORM"]] = relationship(back_populates="customer",
-                                                                          cascade="all, delete-orphan")
 
-    def to_model(self) -> CustomerModel:
-        return CustomerModel(
+    def to_model(self) -> Customer:
+        return Customer(
             id=self.id,
             full_name=self.full_name,
             email=self.email,
             active=self.active,
             created_at=self.created_at,
             updated_at=self.updated_at,
-            credentials=[],
         )
 
 
@@ -48,16 +42,16 @@ class CustomerCredentialsORM(Base):
     password_hash: Mapped[str] = mapped_column(String())
     email: Mapped[str] = mapped_column(String())
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-
     customer_id: Mapped[int] = mapped_column(ForeignKey("customers.id"))
     customer: Mapped["CustomerORM"] = relationship(back_populates="credentials")
 
-
-class CustomerLoginHistoryORM(Base):
-    __tablename__ = "customers_login_history"
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    logged_in_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-
-    customer_id: Mapped[int] = mapped_column(ForeignKey("customers.id"))
-    customer: Mapped["CustomerORM"] = relationship(back_populates="login_history")
+    def to_model(self) -> CustomerCredential:
+        return CustomerCredential(
+            id=self.id,
+            provider=self.provider,
+            provider_user_id=self.provider_user_id,
+            password_hash=self.password_hash,
+            email=self.email,
+            created_at=self.created_at,
+            customer_id=self.customer_id,
+        )

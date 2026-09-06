@@ -11,7 +11,3 @@ class CustomerCreateCommand:
 @dataclass(frozen=True)
 class CustomerGetCommand:
     user_id: int
-
-@dataclass(frozen=True)
-class CustomerGetByEmailCommand:
-    email: str

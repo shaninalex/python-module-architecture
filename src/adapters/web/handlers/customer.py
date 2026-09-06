@@ -6,7 +6,10 @@ from starlette.responses import RedirectResponse
 from adapters.web.core.forms import Form
 from adapters.web.core.template import Templates
 from core.application import Application
-from modules.customer.application.commands import CustomerCreateCommand, CustomerGetByEmailCommand
+from modules.auth.application.commands import EmailAuthenticationCommand
+from modules.auth.domain.exceptions import AuthUserNotActiveError, AuthCredentialsNotFoundError, \
+    AuthPasswordNotMatchError
+from modules.customer.application.commands import CustomerCreateCommand
 from modules.customer.domain.customer import CustomerCreate
 from modules.customer.domain.exceptions import CustomerAlreadyExistsException
 
@@ -73,12 +76,12 @@ class CustomerPages:
                 )
             )
 
+            # NOTE: optimistically not check errors on login after registration
+            await self.app.execute(
+                EmailAuthenticationCommand(email=customer.email, raw_password=form.password)
+            )
             request.session["user_id"] = str(customer.id)
-
-            return self.templates.TemplateResponse(request, "views/registration.html", {
-                "form": CustomerRegistrationForm(),
-                "customer": customer,
-            })
+            return RedirectResponse(url="/", status_code=303)
 
         except CustomerAlreadyExistsException:
             return self.templates.TemplateResponse(request, "views/registration.html", {
@@ -97,17 +100,17 @@ class CustomerPages:
             return self.templates.TemplateResponse(request, "views/login.html", {
                 "form": form,
             }, status_code=400)
-
-        customer = await self.app.execute(
-            CustomerGetByEmailCommand(email=form.email)
-        )
-        if customer is None:
+        try:
+            authenticated = await self.app.execute(
+                EmailAuthenticationCommand(email=form.email, raw_password=form.password)
+            )
+            request.session["user_id"] = str(authenticated.customer_id)
+            return RedirectResponse(url="/", status_code=303)
+        except (AuthCredentialsNotFoundError, AuthUserNotActiveError, AuthPasswordNotMatchError) as e:
             return self.templates.TemplateResponse(request, "views/login.html", {
-                "form": CustomerLoginForm(),
-                "submit_error": "Customer does not exists",
-            })
-        request.session["user_id"] = str(customer.id)
-        return RedirectResponse(url="/", status_code=303)
+                "form": form,
+                "submit_error": "Customer does not exists or invalid credentials",
+            }, status_code=400)
 
     async def logout(self, request: Request):
         request.session["user_id"] = None

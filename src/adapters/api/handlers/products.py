@@ -5,7 +5,7 @@ from starlette.responses import JSONResponse
 
 from core.application import Application
 from modules.catalog.application.commands import ListProductsCommand, ProductDetailCommand
-from modules.catalog.domain.product import ProductModel
+from modules.catalog.domain.product import Product
 
 
 class ProductEndpoint:
@@ -25,7 +25,7 @@ class ProductEndpoint:
         if _limit is not None:
             limit = int(_limit)
 
-        products: List[ProductModel] = await self.app.execute(
+        products: List[Product] = await self.app.execute(
             ListProductsCommand(
                 query=query,
                 offset=offset,

@@ -1,24 +1,23 @@
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 from sqlalchemy.orm import selectinload
-from sqlalchemy.exc import IntegrityError
-from modules.customer.domain.customer import CustomerModel, CustomerCreate, CustomerUpdate
+
+from modules.customer.domain.customer import Customer, CustomerCreate, CustomerUpdate
 from modules.customer.domain.exceptions import CustomerAlreadyExistsException
+from modules.customer.domain.ports import CustomerInternalReader, CustomerInternalWriter
 from modules.customer.infrastructure.schema import CustomerORM, CustomerCredentialsORM
 
 
-class CustomerDB:
+class CustomerDB(CustomerInternalReader, CustomerInternalWriter):
     def __init__(self, db: AsyncEngine):
         self.db = db
 
-    async def get(self, *, customer_id: int) -> CustomerModel | None:
+    async def get(self, *, customer_id: int) -> Customer | None:
         async with AsyncSession(self.db) as session:
             stmt = (
                 select(CustomerORM)
-                .options(
-                    selectinload(CustomerORM.credentials),
-                    selectinload(CustomerORM.login_history),
-                )
+                .options(selectinload(CustomerORM.credentials))
                 .where(CustomerORM.id == customer_id)
             )
             result: CustomerORM | None = await session.scalar(stmt)
@@ -27,7 +26,7 @@ class CustomerDB:
 
             return result.to_model()
 
-    async def create(self, *, payload: CustomerCreate) -> CustomerModel:
+    async def create(self, *, payload: CustomerCreate) -> Customer:
         async with AsyncSession(self.db, expire_on_commit=False) as session:
             customer = CustomerORM(
                 email=payload.email,
@@ -48,22 +47,5 @@ class CustomerDB:
                 raise CustomerAlreadyExistsException(message="Customer already exists")
             return customer.to_model()
 
-    async def update(self, *, payload: CustomerUpdate) -> CustomerModel:
+    async def update(self, *, payload: CustomerUpdate) -> Customer:
         raise Exception("not implemented")
-
-
-    async def get_by_email(self, *, email: str) -> CustomerModel | None:
-        async with AsyncSession(self.db) as session:
-            stmt = (
-                select(CustomerORM)
-                .options(
-                    selectinload(CustomerORM.credentials),
-                    selectinload(CustomerORM.login_history),
-                )
-                .where(CustomerORM.email == email)
-            )
-            result: CustomerORM | None = await session.scalar(stmt)
-            if result is None:
-                return None
-
-            return result.to_model()
