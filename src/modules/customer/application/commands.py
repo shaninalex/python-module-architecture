@@ -7,3 +7,11 @@ from modules.customer.domain.customer import CustomerCreate
 class CustomerCreateCommand:
     payload: CustomerCreate
 
+
+@dataclass(frozen=True)
+class CustomerGetCommand:
+    user_id: int
+
+@dataclass(frozen=True)
+class CustomerGetByEmailCommand:
+    email: str

@@ -50,3 +50,20 @@ class CustomerDB:
 
     async def update(self, *, payload: CustomerUpdate) -> CustomerModel:
         raise Exception("not implemented")
+
+
+    async def get_by_email(self, *, email: str) -> CustomerModel | None:
+        async with AsyncSession(self.db) as session:
+            stmt = (
+                select(CustomerORM)
+                .options(
+                    selectinload(CustomerORM.credentials),
+                    selectinload(CustomerORM.login_history),
+                )
+                .where(CustomerORM.email == email)
+            )
+            result: CustomerORM | None = await session.scalar(stmt)
+            if result is None:
+                return None
+
+            return result.to_model()

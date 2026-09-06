@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% from "partials/form.html" import input, checkbox %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <!-- Page header -->
+            <div class="text-center mb-4">
+                <h1 class="fw-bold">Login</h1>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 p-md-5">
+
+                    <form method="POST" action="{{ url_for('login') }}" novalidate>
+                        <div class="mb-3">
+                            {{ input(form, "email", "Email address", type="email", placeholder="you@example.com") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ input(form, "password", "Password", type="password",
+                            placeholder="Create a password") }}
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100">
+                            Login
+                        </button>
+
+                        {% if submit_error %}
+                        <div class="alert alert-danger mt-4">{{ submit_error }}</div>
+                        {% endif %}
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <p class="text-muted mb-2">
+                            Do not have account?
+                        </p>
+
+                        <a href="{{ url_for('register') }}" class="btn btn-outline-dark">
+                            Register
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

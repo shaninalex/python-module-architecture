@@ -70,11 +70,9 @@
                             Create Account
                         </button>
 
-
                         {% if submit_error %}
                         <div class="alert alert-danger mt-4">{{ submit_error }}</div>
                         {% endif %}
-
                     </form>
 
                     <hr class="my-4">
@@ -84,7 +82,7 @@
                             Already have an account?
                         </p>
 
-                        <a href="#" class="btn btn-outline-dark disabled">
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-dark">
                             Sign In
                         </a>
                     </div>

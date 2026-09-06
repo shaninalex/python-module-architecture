@@ -1,0 +1,16 @@
+{% macro UserHeaderDropdown(user) %}
+<div class="dropdown">
+    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        {{ user.email }}
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item disabled" href="#">User detail</a></li>
+        <li><a class="dropdown-item disabled" href="#">Wishlist</a></li>
+        <li><a class="dropdown-item disabled" href="#">Orders</a></li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+</div>
+{% endmacro %}

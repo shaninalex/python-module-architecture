@@ -1,3 +1,5 @@
+{% from "partials/user/header_dropdown.html" import UserHeaderDropdown with context %}
+
 {% macro Header() %}
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
@@ -13,15 +15,29 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        {% if request.state.customer %}
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('about') }}">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
                 </li>
+                {% if not request.state.customer %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('register') }}">Register</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                </li>
+                {% endif %}
             </ul>
+            {% if request.state.customer %}
+                {{ UserHeaderDropdown(request.state.customer) }}
+            {% endif %}
         </div>
     </div>
 </nav>
