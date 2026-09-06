@@ -287,23 +287,27 @@ def make_product(cat: str, seq: int):
         "variants": variants,
     }
 
+def main():
+    COUNTS = {c: 8 for c in SHOE_CATS}
+    COUNTS.update({c: 5 for c in ACCESSORY_CATS})
 
-COUNTS = {c: 8 for c in SHOE_CATS}
-COUNTS.update({c: 5 for c in ACCESSORY_CATS})
+    products = []
+    seq = 0
+    for category, amount in COUNTS.items():
+        for _ in range(amount):
+            seq += 1
+            products.append(make_product(category, seq))
 
-products = []
-seq = 0
-for category, amount in COUNTS.items():
-    for _ in range(amount):
-        seq += 1
-        products.append(make_product(category, seq))
+    random.shuffle(products)
 
-random.shuffle(products)
+    out = os.path.join(ROOT, "products.json")
+    with open(out, "w", encoding="utf-8") as f:
+        json.dump(products, f, indent=4, ensure_ascii=False)
+        f.write("\n")
 
-out = os.path.join(ROOT, "products.json")
-with open(out, "w", encoding="utf-8") as f:
-    json.dump(products, f, indent=4, ensure_ascii=False)
-    f.write("\n")
+    print(f"products: {len(products)}  variants: {sum(len(p['variants']) for p in products)}")
+    print(f"unique titles: {len(used_titles)}  skus: {len(used_sku)}  barcodes: {len(used_barcode)}")
 
-print(f"products: {len(products)}  variants: {sum(len(p['variants']) for p in products)}")
-print(f"unique titles: {len(used_titles)}  skus: {len(used_sku)}  barcodes: {len(used_barcode)}")
+
+if __name__ == "__main__":
+    main()
