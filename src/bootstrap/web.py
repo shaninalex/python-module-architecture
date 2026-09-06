@@ -1,7 +1,6 @@
-from starlette.applications import Starlette
 from starlette.types import ASGIApp
 
-from adapters.web.router import WebAdapter
+from adapters.web.server import WebAdapter
 from bootstrap.container import Container
 from core.application import Application
 

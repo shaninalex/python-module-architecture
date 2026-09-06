@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Page header -->
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h1 class="fw-bold">Contact Us</h1>
+            <p class="text-muted">
+                Have a question or need some help? Send us a message.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Contact information -->
+        <div class="col-md-5">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="card-title mb-4">Get in touch</h4>
+
+                    <div class="mb-4">
+                        <h6 class="fw-bold">Email</h6>
+                        <p class="text-muted mb-0">
+                            support@buyshoes.com
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="fw-bold">Phone</h6>
+                        <p class="text-muted mb-0">
+                            +1 (555) 123-4567
+                        </p>
+                    </div>
+
+                    <div>
+                        <h6 class="fw-bold">Address</h6>
+                        <p class="text-muted mb-0">
+                            123 Main Street<br>
+                            New York, NY 10001
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact form -->
+        <div class="col-md-7">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="card-title mb-4">Send us a message</h4>
+
+                    <form method="POST" action="{{ url_for('contact') }}">
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">
+                                Name
+                            </label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    placeholder="Your name"
+                                    required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                Email
+                            </label>
+                            <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    name="email"
+                                    placeholder="you@example.com"
+                                    required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">
+                                Subject
+                            </label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="subject"
+                                    name="subject"
+                                    placeholder="How can we help?"
+                                    required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">
+                                Message
+                            </label>
+                            <textarea
+                                    class="form-control"
+                                    id="message"
+                                    name="message"
+                                    rows="6"
+                                    placeholder="Write your message..."
+                                    required
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Send message
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

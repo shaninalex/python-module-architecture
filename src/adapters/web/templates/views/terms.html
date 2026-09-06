@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Page header -->
+    <div class="row mb-5">
+        <div class="col text-center">
+            <h1 class="display-5 fw-bold">Terms & Conditions</h1>
+            <p class="text-muted">
+                Please read these terms carefully before using BuyShoes.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">1. Introduction</h2>
+                <p class="text-muted">
+                    Welcome to BuyShoes. These Terms & Conditions govern your
+                    use of our website and your purchase of products from our
+                    online store. By accessing or using BuyShoes, you agree
+                    to be bound by these terms.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">2. Products and Availability</h2>
+                <p class="text-muted">
+                    We make every effort to ensure that product descriptions,
+                    images, prices, and availability are accurate. However,
+                    products may occasionally become unavailable or contain
+                    errors in their descriptions or pricing.
+                </p>
+                <p class="text-muted">
+                    BuyShoes reserves the right to correct errors, update
+                    product information, or cancel an order when necessary.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">3. Orders</h2>
+                <p class="text-muted">
+                    When you place an order, you are making an offer to
+                    purchase the selected products. An order is considered
+                    accepted once we confirm it.
+                </p>
+                <p class="text-muted">
+                    We reserve the right to refuse or cancel an order for
+                    reasons including product availability, pricing errors,
+                    suspected fraudulent activity, or other legitimate reasons.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">4. Prices and Payment</h2>
+                <p class="text-muted">
+                    All prices displayed on BuyShoes are shown on the product
+                    and checkout pages. Prices may change without prior notice.
+                </p>
+                <p class="text-muted">
+                    Payment must be successfully completed before an order
+                    can be processed and shipped.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">5. Shipping and Delivery</h2>
+                <p class="text-muted">
+                    We aim to process and ship orders within the estimated
+                    timeframes displayed during checkout. Delivery times may
+                    vary depending on the destination, shipping provider,
+                    weather, holidays, and other circumstances outside our
+                    control.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">6. Returns and Refunds</h2>
+                <p class="text-muted">
+                    Customers may request a return or refund in accordance
+                    with our return policy. Products must generally be returned
+                    in their original condition and packaging.
+                </p>
+                <p class="text-muted">
+                    Please contact our support team before sending a product
+                    back to BuyShoes.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">7. Website Use</h2>
+                <p class="text-muted">
+                    You agree to use BuyShoes only for lawful purposes. You
+                    must not attempt to interfere with the operation of the
+                    website, gain unauthorized access to our systems, or use
+                    the website for fraudulent or abusive activities.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">8. Intellectual Property</h2>
+                <p class="text-muted">
+                    All content on BuyShoes, including logos, text, graphics,
+                    images, product descriptions, and website design, is owned
+                    by or licensed to BuyShoes unless otherwise stated.
+                </p>
+                <p class="text-muted">
+                    Content may not be copied, reproduced, modified, or
+                    distributed without prior permission.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">9. Limitation of Liability</h2>
+                <p class="text-muted">
+                    BuyShoes will make reasonable efforts to keep the website
+                    available and information accurate. However, we do not
+                    guarantee that the website will always be uninterrupted,
+                    error-free, or free from technical issues.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 fw-bold">10. Changes to These Terms</h2>
+                <p class="text-muted">
+                    BuyShoes may update these Terms & Conditions from time to
+                    time. Any changes will be posted on this page. Your
+                    continued use of the website after changes are posted
+                    constitutes acceptance of the updated terms.
+                </p>
+            </section>
+
+            <section class="mb-4">
+                <h2 class="h4 fw-bold">11. Contact Us</h2>
+                <p class="text-muted">
+                    If you have questions about these Terms & Conditions,
+                    please contact the BuyShoes support team.
+                </p>
+
+                <a href="{{ url_for('contact') }}" class="btn btn-dark mt-2">
+                    Contact BuyShoes
+                </a>
+            </section>
+
+            <hr class="my-5">
+
+            <p class="small text-muted text-center mb-0">
+                Last updated: September 6, 2026
+            </p>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

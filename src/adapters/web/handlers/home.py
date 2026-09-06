@@ -1,14 +1,15 @@
 from dataclasses import asdict
 
 from starlette.requests import Request
-from starlette.responses import JSONResponse
 
+from adapters.web.core.template import Templates
 from core.application import Application
 from modules.catalog.application.query import ListProductsCommand
 
 
 class HomePage:
-    def __init__(self, app: Application):
+    def __init__(self, app: Application, templates: Templates):
+        self.templates = templates
         self.app = app
 
     async def get(self, request: Request):
@@ -18,4 +19,6 @@ class HomePage:
             ListProductsCommand(query=query)
         )
 
-        return JSONResponse([asdict(p) for p in products])
+        return self.templates.TemplateResponse(request, "views/home.html", {
+            "products": [asdict(p) for p in products],
+        })

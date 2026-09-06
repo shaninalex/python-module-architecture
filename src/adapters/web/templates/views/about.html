@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Page header -->
+    <div class="row mb-5">
+        <div class="col text-center">
+            <h1 class="display-5 fw-bold">About Us</h1>
+            <p class="lead text-muted">
+                Step into something better.
+            </p>
+        </div>
+    </div>
+
+    <!-- About the store -->
+    <div class="row align-items-center mb-5">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <h2 class="fw-bold mb-3">Your Next Pair Starts Here</h2>
+
+            <p class="text-muted">
+                Welcome to our shoe store — a place where style, comfort,
+                and quality come together. We carefully select footwear
+                for everyday life, workouts, weekends, and everything in between.
+            </p>
+
+            <p class="text-muted">
+                Whether you're looking for a fresh pair of sneakers,
+                comfortable everyday shoes, or something to complete
+                your outfit, we're here to help you find the perfect fit.
+            </p>
+
+            <a href="{{ url_for('home') }}" class="btn btn-dark mt-2">
+                Shop Shoes
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <div class="bg-light rounded p-5 text-center">
+                <h2 class="display-4 fw-bold">Step.</h2>
+                <h2 class="display-4 fw-bold">Style.</h2>
+                <h2 class="display-4 fw-bold">Repeat.</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why choose us -->
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h2 class="fw-bold">Why Shop With Us?</h2>
+            <p class="text-muted">
+                Everything you need for a better step.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <h4 class="fw-bold">Quality Footwear</h4>
+                    <p class="text-muted mb-0">
+                        We offer carefully selected shoes designed to
+                        look great and feel comfortable.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <h4 class="fw-bold">Great Selection</h4>
+                    <p class="text-muted mb-0">
+                        From everyday sneakers to performance footwear,
+                        find a pair that matches your lifestyle.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <h4 class="fw-bold">Customer First</h4>
+                    <p class="text-muted mb-0">
+                        We're committed to making your shopping experience
+                        simple, convenient, and enjoyable.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Categories -->
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h2 class="fw-bold">Find Your Style</h2>
+            <p class="text-muted">
+                Shoes for every occasion.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-5">
+
+        <div class="col-6 col-md-3">
+            <div class="bg-light rounded p-4 text-center">
+                <h5 class="fw-bold mb-0">Sneakers</h5>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="bg-light rounded p-4 text-center">
+                <h5 class="fw-bold mb-0">Running</h5>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="bg-light rounded p-4 text-center">
+                <h5 class="fw-bold mb-0">Casual</h5>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="bg-light rounded p-4 text-center">
+                <h5 class="fw-bold mb-0">Lifestyle</h5>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="row">
+        <div class="col">
+            <div class="bg-dark text-white rounded p-5 text-center">
+                <h2 class="fw-bold">Ready for a New Pair?</h2>
+                <p class="mb-4">
+                    Explore our collection and find your next favorite shoes.
+                </p>
+
+                <a href="{{ url_for('home') }}" class="btn btn-light">
+                    Browse Collection
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

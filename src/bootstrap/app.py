@@ -1,4 +1,7 @@
+from databases import Database
+
 from bootstrap.container import Container
+from bootstrap.database import db
 from core.application import Application
 from core.command_bus import CommandBus
 from core.event_bus import EventBus
@@ -14,11 +17,9 @@ def create_application():
 
     events = EventBus()
     _container.register(EventBus, instance=events)
+    _container.register(Database, instance=db)
 
     # modules
-    catalog_module = CatalogModule()
-    _container.register(CatalogModule, instance=catalog_module)
-
     application = Application(
         commands=commands,
         events=events,
@@ -27,6 +28,6 @@ def create_application():
     _container.register(Application, instance=application)
 
     # configure modules after declaring all base dependencies
-    catalog_module.configure(_container)
+    CatalogModule().configure(_container)
 
     return _container
