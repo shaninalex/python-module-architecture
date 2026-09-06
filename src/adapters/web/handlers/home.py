@@ -4,7 +4,7 @@ from starlette.requests import Request
 
 from adapters.web.core.template import Templates
 from core.application import Application
-from modules.catalog.application.query import ListProductsCommand
+from modules.catalog.application.commands import ListProductsCommand
 
 
 class HomePage:

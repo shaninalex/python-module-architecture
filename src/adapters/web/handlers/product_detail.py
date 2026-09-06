@@ -2,7 +2,7 @@ from starlette.requests import Request
 
 from adapters.web.core.template import Templates
 from core.application import Application
-from modules.catalog.application.query import ProductDetailCommand
+from modules.catalog.application.commands import ProductDetailCommand
 
 
 class ProductPage:

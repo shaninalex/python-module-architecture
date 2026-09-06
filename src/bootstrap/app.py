@@ -6,6 +6,7 @@ from core.application import Application
 from core.command_bus import CommandBus
 from core.event_bus import EventBus
 from modules.catalog.module import CatalogModule
+from modules.customer.module import CustomerModule
 
 
 def create_application():
@@ -13,9 +14,9 @@ def create_application():
 
     # core
     commands = CommandBus()
-    _container.register(CommandBus, instance=commands)
-
     events = EventBus()
+
+    _container.register(CommandBus, instance=commands)
     _container.register(EventBus, instance=events)
     _container.register(AsyncEngine, instance=db_engine)
 
@@ -29,5 +30,6 @@ def create_application():
 
     # configure modules after declaring all base dependencies
     CatalogModule().configure(_container)
+    CustomerModule().configure(_container)
 
     return _container

@@ -1,13 +1,13 @@
 from typing import List
 
-from modules.catalog.application.query import ListProductsCommand, ProductDetailCommand
-from modules.catalog.domain.ports import Catalog
+from modules.catalog.application.commands import ListProductsCommand, ProductDetailCommand
+from modules.catalog.domain.ports import CatalogPort
 from modules.catalog.domain.product import ProductModel
 
 
 class ListProductsHandler:
 
-    def __init__(self, catalog: Catalog):
+    def __init__(self, catalog: CatalogPort):
         self.catalog = catalog
 
     async def __call__(self, query: ListProductsCommand) -> List[ProductModel]:
@@ -21,7 +21,7 @@ class ListProductsHandler:
 
 class ProductDetailHandler:
 
-    def __init__(self, catalog: Catalog):
+    def __init__(self, catalog: CatalogPort):
         self.catalog = catalog
 
     async def __call__(self, query: ProductDetailCommand) -> ProductModel:

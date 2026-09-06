@@ -4,7 +4,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from core.application import Application
-from modules.catalog.application.query import ListProductsCommand, ProductDetailCommand
+from modules.catalog.application.commands import ListProductsCommand, ProductDetailCommand
 from modules.catalog.domain.product import ProductModel
 
 

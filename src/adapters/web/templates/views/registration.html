@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <!-- Page header -->
+            <div class="text-center mb-4">
+                <h1 class="fw-bold">Create an Account</h1>
+                <p class="text-muted">
+                    Join BuyShoes and make your next purchase even easier.
+                </p>
+            </div>
+
+            {% if customer %}
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Registered!</h4>
+                <p>Customer with email {{ customer.email }} successfully created!</p>
+                <hr>
+                <p class="mb-0">However, login page is not implemented yet.</p>
+            </div>
+            {% endif %}
+
+            <!-- Registration form -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 p-md-5">
+
+                    <form method="POST" action="{{ url_for('register') }}">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="first_name" class="form-label">
+                                    First name
+                                </label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="first_name"
+                                        name="first_name"
+                                        placeholder="John"
+                                        required
+                                >
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="last_name" class="form-label">
+                                    Last name
+                                </label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="last_name"
+                                        name="last_name"
+                                        placeholder="Smith"
+                                        required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                Email address
+                            </label>
+                            <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    name="email"
+                                    placeholder="you@example.com"
+                                    required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                Password
+                            </label>
+                            <input
+                                    type="password"
+                                    class="form-control"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Create a password"
+                                    minlength="8"
+                                    required
+                            >
+                            <div class="form-text">
+                                Password must be at least 8 characters long.
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="confirm_password" class="form-label">
+                                Confirm password
+                            </label>
+                            <input
+                                    type="password"
+                                    class="form-control"
+                                    id="confirm_password"
+                                    name="confirm_password"
+                                    placeholder="Repeat your password"
+                                    minlength="8"
+                                    required
+                            >
+                        </div>
+
+                        <div class="form-check mb-4">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="terms"
+                                    name="terms"
+                                    required
+                            >
+                            <label class="form-check-label" for="terms">
+                                I agree to the
+                                <a href="{{ url_for('terms_conditions') }}">
+                                    Terms & Conditions
+                                </a>
+                                of BuyShoes.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100">
+                            Create Account
+                        </button>
+
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <p class="text-muted mb-2">
+                            Already have an account?
+                        </p>
+
+                        <a href="#" class="btn btn-outline-dark disabled">
+                            Sign In
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

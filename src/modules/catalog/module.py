@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 from bootstrap.container import Container
 from core.command_bus import CommandBus
 from modules.catalog.application.handlers import ListProductsHandler, ProductDetailHandler
-from modules.catalog.application.query import ListProductsCommand, ProductDetailCommand
+from modules.catalog.application.commands import ListProductsCommand, ProductDetailCommand
 from modules.catalog.infrastructure.db import DBCatalog
 from src.bootstrap.abstract import Module
 
