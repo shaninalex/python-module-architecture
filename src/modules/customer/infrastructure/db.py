@@ -1,8 +1,9 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 from sqlalchemy.orm import selectinload
-
+from sqlalchemy.exc import IntegrityError
 from modules.customer.domain.customer import CustomerModel, CustomerCreate, CustomerUpdate
+from modules.customer.domain.exceptions import CustomerAlreadyExistsException
 from modules.customer.infrastructure.schema import CustomerORM, CustomerCredentialsORM
 
 
@@ -41,7 +42,10 @@ class CustomerDB:
                 ],
             )
             session.add(customer)
-            await session.commit()
+            try:
+                await session.commit()
+            except IntegrityError:
+                raise CustomerAlreadyExistsException(message="Customer already exists")
             return customer.to_model()
 
     async def update(self, *, payload: CustomerUpdate) -> CustomerModel:

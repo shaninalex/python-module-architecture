@@ -1,0 +1,34 @@
+{% macro input(form, name, label, type="text", placeholder="", help="", attrs="") %}
+    <label for="{{ name }}" class="form-label">{{ label }}</label>
+    <input
+            type="{{ type }}"
+            class="form-control{% if form.errors[name] %} is-invalid{% endif %}"
+            id="{{ name }}"
+            name="{{ name }}"
+            value="{% if type != 'password' %}{{ form[name] }}{% endif %}"
+            placeholder="{{ placeholder }}"
+            {{ attrs | safe }}
+    >
+    {% if form.errors[name] %}
+        <div class="invalid-feedback">{{ form.errors[name] }}</div>
+    {% elif help %}
+        <div class="form-text">{{ help }}</div>
+    {% endif %}
+{% endmacro %}
+
+{% macro checkbox(form, name, attrs="") %}
+    <div class="form-check">
+        <input
+                class="form-check-input{% if form.errors[name] %} is-invalid{% endif %}"
+                type="checkbox"
+                id="{{ name }}"
+                name="{{ name }}"
+                {% if form[name] %}checked{% endif %}
+                {{ attrs | safe }}
+        >
+        <label class="form-check-label" for="{{ name }}">{{ caller() }}</label>
+        {% if form.errors[name] %}
+            <div class="invalid-feedback">{{ form.errors[name] }}</div>
+        {% endif %}
+    </div>
+{% endmacro %}
