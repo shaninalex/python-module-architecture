@@ -1,0 +1,11 @@
+{% macro ProductCard(product) %}
+    <div class="card">
+        <a href="#">
+            <img alt="{{ product.title }}" class="card-img-top" src="{{ url_for('static', path=product.image ) }}">
+        </a>
+        <div class="card-body">
+            <a class="card-title fw-bold" href="#">{{ product.title }}</a>
+            <p class="mb-0">{{ product.short_description }}</p>
+        </div>
+    </div>
+{% endmacro %}

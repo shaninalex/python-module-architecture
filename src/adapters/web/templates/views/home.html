@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% from "partials/product/card.html" import ProductCard with context %}
 
+{% block content %}
 
 <div class="container pt-4">
     <div class="row">
         <div class="col">
             <h1>Home page</h1>
         </div>
+    </div>
 
-        <div class="col-12">
-            {% for product in products %}
-                <div>
-                    {{ product.id }} - {{ product.title }}
-                </div>
-            {% endfor %}
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mb-4">
+            {{ ProductCard(product) }}
         </div>
+        {% endfor %}
     </div>
 </div>
-
 
 {% endblock %}
