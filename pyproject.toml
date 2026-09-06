@@ -20,6 +20,12 @@ dependencies = [
 [project.scripts]
 market = "market:main"
 
+[tool.uv.workspace]
+members = [
+    # database seeder. Fills the database with mock shoes, categories, brands
+    "database/seeder",
+]
+
 [build-system]
 requires = ["uv_build>=0.12.1,<0.13.0"]
 build-backend = "uv_build"

@@ -16,3 +16,11 @@ migrate_up:
 		-path $(PROJECT_ROOT)/resources/migrations \
 		-database "$(DB_URL)" \
 		-verbose up
+
+seed:
+	uv run --package seeder python -m seeder \
+		--config $(PROJECT_ROOT)/database/seeder/config.yaml \
+		start
+
+seed_fixtures:
+	uv run --package seeder python $(PROJECT_ROOT)/database/seeder/resources/gen_products.py

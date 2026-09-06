@@ -10,6 +10,9 @@ PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -f ./resources/init_db
 # 3) migrations
 make migrate_up
 
-# 4) run app
+# 4) fill the database with mock shoes
+make seed
+
+# 5) run app
 uv run --env-file .env --module uvicorn src.market.web:app
 ```

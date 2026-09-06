@@ -1,0 +1,47 @@
+{
+    "color": {
+        "black": {},
+        "white": {},
+        "sand": {},
+        "navy": {},
+        "olive": {},
+        "burgundy": {},
+        "grey melange": {},
+        "off-white / gum": {},
+        "cognac brown": {},
+        "graphite": {}
+    },
+    "material": {
+        "full-grain leather": {},
+        "oiled nubuck": {},
+        "suede": {},
+        "knit textile": {},
+        "waxed canvas": {},
+        "recycled mesh": {}
+    },
+    "sole": {
+        "vulcanised rubber": {},
+        "EVA foam": {},
+        "lugged rubber": {},
+        "leather cup": {},
+        "crepe": {},
+        "TPU plate": {}
+    },
+    "closure": {
+        "laces": {},
+        "velcro": {},
+        "slip-on": {},
+        "side zip": {},
+        "buckle": {}
+    },
+    "width": {
+        "narrow": {},
+        "regular": {},
+        "wide": {}
+    },
+    "season": {
+        "all season": {},
+        "spring / summer": {},
+        "autumn / winter": {}
+    }
+}

@@ -1,0 +1,52 @@
+[
+    {
+        "title": "men",
+        "children": [
+            { "title": "men sneakers" },
+            { "title": "men boots" },
+            { "title": "men loafers" },
+            { "title": "men sandals" },
+            { "title": "men formal" },
+            { "title": "men running" }
+        ]
+    },
+    {
+        "title": "women",
+        "children": [
+            { "title": "women sneakers" },
+            { "title": "women boots" },
+            { "title": "women heels" },
+            { "title": "women ballet flats" },
+            { "title": "women sandals" },
+            { "title": "women running" }
+        ]
+    },
+    {
+        "title": "kids",
+        "children": [
+            { "title": "kids sneakers" },
+            { "title": "kids boots" },
+            { "title": "kids sandals" },
+            { "title": "kids school shoes" }
+        ]
+    },
+    {
+        "title": "sport",
+        "children": [
+            { "title": "trail running" },
+            { "title": "training" },
+            { "title": "football boots" },
+            { "title": "basketball" },
+            { "title": "hiking" }
+        ]
+    },
+    {
+        "title": "accessories",
+        "children": [
+            { "title": "laces" },
+            { "title": "insoles" },
+            { "title": "shoe care" },
+            { "title": "socks" }
+        ]
+    }
+]

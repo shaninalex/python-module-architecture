@@ -1,0 +1,19 @@
+[project]
+name = "seeder"
+version = "0.0.0"
+description = "Project seeder. Fill database with mock shoes"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "psycopg2-binary>=2.9.12",
+    "faker>=40.4.0",
+    "PyYAML>=6.0.2",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["seeder*"]
