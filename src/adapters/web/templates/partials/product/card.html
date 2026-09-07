@@ -1,10 +1,15 @@
 {% macro ProductCard(product) %}
     <div class="card">
         <a href="{{ url_for('product', product_id=product.id) }}">
-            <img alt="{{ product.title }}" class="card-img-top" src="{{ url_for('static', path=product.image ) }}">
+            {% if product.image_url %}
+                <img alt="{{ product.title }}" class="card-img-top" src="{{ url_for('static', path=product.image_url ) }}">
+            {% else %}
+                <img alt="{{ product.title }}" class="card-img-top" src="{{ url_for('static', path='images/no_image.jpg' ) }}">
+            {% endif %}
         </a>
+
         <div class="card-body">
-            <a class="card-title fw-bold" href="{{ url_for('product', product_id=product.id) }}">{{ product.title }}</a>
+            <a class="card-title fw-bold" href="{{ url_for('product', product_id=product.id) }}">{{ product.title }} [{{ product.id }}]</a>
             <p class="mb-0">{{ product.short_description }}</p>
         </div>
     </div>
