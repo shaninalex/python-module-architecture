@@ -1,14 +1,12 @@
 from sqlalchemy.ext.asyncio import AsyncEngine
 
-from bootstrap.abstract import Module
-from bootstrap.container import Container
 from core.command_bus import CommandBus
 from modules.customer.application.commands import CustomerCreateCommand, CustomerGetCommand
 from modules.customer.application.handlers import CustomerCreateHandler, CustomerGetHandler
 from modules.customer.infrastructure.db import CustomerDB
 
-class CustomerModule(Module):
-    def configure(self, container: Container):
+class CustomerModule:
+    def configure(self, container):
         db = container.resolve(AsyncEngine)
         customer_db = CustomerDB(db)
         cmd = container.resolve(CommandBus)

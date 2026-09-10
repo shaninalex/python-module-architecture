@@ -14,10 +14,10 @@ def middlewares(application: Application):
     if secret_key is None:
         raise Exception("Unable to init SessionMiddleware - secret key is not defined")
 
-    debug = os.getenv("APP_MARKET_ENV") == "development"
+    https_only = os.getenv("APP_MARKET_ENV") != "development"
 
     return [
-        Middleware(SessionMiddleware, secret_key=secret_key, https_only=debug),
+        Middleware(SessionMiddleware, secret_key=secret_key, https_only=https_only),
         Middleware(CORSMiddleware, allow_origins=['*']),
         Middleware(CustomerHeaderMiddleware, application=application)
     ]
