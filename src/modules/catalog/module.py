@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncEngine
 
-from core.command_bus import CommandBus
+from core.bus import CommandBus
 from modules.catalog.application.handlers import ListProductsHandler, ProductDetailHandler
 from modules.catalog.application.commands import ListProductsCommand, ProductDetailCommand
 from modules.catalog.infrastructure.repository import CatalogRepository

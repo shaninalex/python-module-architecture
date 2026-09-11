@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 from bootstrap.container import Container
 from bootstrap.database import db_engine
 from core.application import Application
-from core.command_bus import CommandBus
+from core.bus import CommandBus
 from core.event_bus import EventBus
 from modules.auth.application.ports import AuthCredentialsReaderPort
 from modules.auth.module import AuthModule

@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 
-from modules.auth.infrastructure.schema import CustomerLoginHistoryORM
+from modules.auth._internal.schema import CustomerLoginHistoryORM
 
 
 class AuthDB:

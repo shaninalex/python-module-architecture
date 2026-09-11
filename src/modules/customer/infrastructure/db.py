@@ -5,11 +5,10 @@ from sqlalchemy.orm import selectinload
 
 from modules.customer.domain.customer import Customer, CustomerCreate, CustomerUpdate
 from modules.customer.domain.exceptions import CustomerAlreadyExistsException
-from modules.customer.domain.ports import CustomerInternalReader, CustomerInternalWriter
 from modules.customer.infrastructure.schema import CustomerORM, CustomerCredentialsORM
 
 
-class CustomerDB(CustomerInternalReader, CustomerInternalWriter):
+class CustomerDB:
     def __init__(self, db: AsyncEngine):
         self.db = db
 

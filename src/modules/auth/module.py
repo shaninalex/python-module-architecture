@@ -1,10 +1,10 @@
 from sqlalchemy.ext.asyncio import AsyncEngine
 
-from core.command_bus import CommandBus
+from core.bus import CommandBus
 from modules.auth.application.commands import EmailAuthenticationCommand
 from modules.auth.application.email_login_handler import EmailAuthenticationHandler
 from modules.auth.application.ports import AuthCredentialsReaderPort
-from modules.auth.infrastructure.db import AuthDB
+from modules.auth._internal.db import AuthDB
 
 
 class AuthModule:

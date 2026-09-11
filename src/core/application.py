@@ -1,4 +1,4 @@
-from core.command_bus import CommandBus
+from core.bus import CommandBus
 from core.event_bus import EventBus
 
 
