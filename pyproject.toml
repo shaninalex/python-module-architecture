@@ -1,5 +1,5 @@
 [project]
-name = "market"
+name = "blog"
 version = "0.3.0"
 description = "Add your description here"
 readme = "README.md"
@@ -10,24 +10,18 @@ requires-python = ">=3.14"
 dependencies = [
     "argon2-cffi>=25.1.0",
     "asyncpg>=0.31.0",
-    "faker>=40.38.0",
+    "faker==40.39.0",
     "itsdangerous>=2.2.0",
     "jinja2>=3.1.6",
     "punq>=0.8.0",
     "python-multipart>=0.0.32",
-    "sqlalchemy>=2.0.52",
+    "sqlalchemy==2.0.54",
     "starlette>=1.6.0",
-    "uvicorn>=0.52.4",
+    "uvicorn==0.53.0",
 ]
 
 [project.scripts]
-market = "market:main"
-
-[tool.uv.workspace]
-members = [
-    # database seeder. Fills the database with mock shoes, categories, brands
-    "database/seeder",
-]
+blog = "blog.__main__:main"
 
 [build-system]
 requires = ["uv_build>=0.12.1,<0.13.0"]
