@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "alembic>=1.20.0",
     "argon2-cffi>=25.1.0",
     "asyncpg>=0.31.0",
     "faker==40.39.0",
@@ -15,6 +16,7 @@ dependencies = [
     "jinja2>=3.1.6",
     "punq>=0.8.0",
     "python-multipart>=0.0.32",
+    "python-slugify>=9.1.0",
     "sqlalchemy==2.0.54",
     "starlette>=1.6.0",
     "uvicorn==0.53.0",

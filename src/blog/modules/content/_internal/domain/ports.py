@@ -1,0 +1,13 @@
+from collections.abc import Sequence
+from typing import Protocol
+
+from blog.modules.content._internal.domain.article import Article
+
+
+class ArticleRepo(Protocol):
+    async def save(self, article: Article) -> Article: ...
+    async def by_id(self, article_id: int) -> Article | None: ...
+    async def by_slug(self, slug: str) -> Article | None: ...
+    async def page(
+        self, *, tag: str | None, author_id: int | None, offset: int, limit: int
+    ) -> tuple[Sequence[Article], int]: ...
