@@ -17,7 +17,7 @@ class Database:
     def session(self) -> AsyncSession:
         current = _session.get()
         if current is None:
-            raise RuntimeError("db: no active session — виклик поза транзакцією застосунку")
+            raise RuntimeError("db: no active session — call outside of the application context")
         return current
 
     @asynccontextmanager
