@@ -4,22 +4,18 @@ from typing import Any, Protocol, runtime_checkable
 
 @runtime_checkable
 class Clock(Protocol):
-    """Protocol for accessing the current time in a testable manner."""
 
     def now(self) -> datetime:
-        """Returns the current timezone-aware UTC datetime."""
         ...
 
 
 class SystemClock:
-    """Clock implementation returning actual current UTC time."""
 
     def now(self) -> datetime:
         return datetime.now(timezone.utc)
 
 
 class MockClock:
-    """Clock implementation for unit testing with controllable time."""
 
     def __init__(self, initial_time: datetime | None = None) -> None:
         self._now = initial_time or datetime.now(timezone.utc)

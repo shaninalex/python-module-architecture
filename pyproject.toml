@@ -18,6 +18,8 @@ dependencies = [
     "punq>=0.8.0",
     "python-multipart>=0.0.32",
     "python-slugify>=9.1.0",
+    "pyyaml>=6.0.3",
+    "routes>=2.5.1",
     "sqlalchemy==2.0.54",
     "starlette>=1.6.0",
     "uvicorn==0.53.0",
