@@ -20,7 +20,6 @@ _STATUS = {
 
 async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
     if exc.kind is Kind.INTERNAL:
-        # Внутрішні деталі — у лог, не клієнту (§14.2).
         logger.exception("unhandled", extra={"code": exc.code})
         return JSONResponse({"error": {"code": "internal", "message": "Internal error"}}, 500)
 

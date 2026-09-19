@@ -2,7 +2,7 @@ env: development
 debug: true
 
 database:
-  url: postgresql://blog_user:bloguserpassword@localhost:5432/blog
+  url: postgresql+asyncpg://blog_user:bloguserpassword@localhost:5432/blog
   echo: true
   ssl: false
 
