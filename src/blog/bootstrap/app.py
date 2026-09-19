@@ -29,7 +29,12 @@ class Application:
 async def build_app(cfg: Config) -> Application:
     logger = logging.getLogger(__name__)  # make our own logger
     clock = SystemClock()
-    _engine = create_async_engine(url=cfg.database.url.reveal(), echo=cfg.database.echo)
+    db_url = cfg.database.url.reveal()
+    # Ensure async driver (asyncpg) is used for PostgreSQL connections
+    if db_url.startswith("postgresql://"):
+        db_url = db_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+
+    _engine = create_async_engine(url=db_url, echo=cfg.database.echo)
     db = Database(_engine)
 
     guard = Guard()

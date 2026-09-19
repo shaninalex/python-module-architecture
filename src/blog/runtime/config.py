@@ -1,3 +1,4 @@
+import os
 import yaml
 from pathlib import Path
 from dataclasses import dataclass
@@ -36,7 +37,46 @@ class Config:
     api: ApiConfig
 
 
+def config_path(p: str | Path | None = None) -> Path:
+    if p:
+        return Path(p).expanduser().resolve()
+
+    env_path = os.getenv("BLOG_CONFIG_PATH") or os.getenv("BLOG_CONFIG")
+    if env_path:
+        return Path(env_path).expanduser().resolve()
+
+    candidates = [
+        Path.cwd() / "config" / "config.yaml",
+        Path.cwd() / "config" / "config.yml",
+        Path.cwd() / "config.yaml",
+        Path("/etc/blog/config.yaml"),
+    ]
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate.resolve()
+
+    return (Path.cwd() / "config" / "config.yaml").resolve()
+
+
 def load(path: Path) -> Config:
     with open(path) as f:
         config = yaml.safe_load(f)
-        return config
+        return Config(
+            env=config.get("env", "development"),
+            debug=config.get("debug", False),
+            database=DatabaseConfig(
+                url=Secret(config["database"]["url"]),
+                echo=config["database"]["echo"],
+                pool_size=config["database"].get("pool_size", 10),
+                ssl=config["database"]["ssl"],
+            ),
+            web=WebConfig(
+                secret_key=Secret(config["web"]["secret_key"]),
+                https_only=config["web"]["https_only"],
+                session_max_age=config["web"].get("session_max_age"),
+                same_site=config["web"].get("same_site"),
+            ),
+            api=ApiConfig(
+                cors_origins=config["api"]["cors_origins"],
+            ),
+        )
